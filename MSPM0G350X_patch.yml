@@ -57,19 +57,23 @@ _modify:
 #       "Sys":
 #         value: 15
 #         description:  "Tick	SysTick handler"
+
 # "INT_GROUP0":
-#   _add:
-#     _interrupts:
-#       "INT_GROUP0":
-#         value: 16
-#         description: 	"Combined peripheral group 0 handler (see INT_GROUPO below)"
+"WWDT0,WWDT1,DEBUGSS,FLASHCTL,WUC,SYSCTL":
+  _add:
+    _interrupts:
+      "INT_GROUP0":
+        value: 16
+        description: 	"Combined peripheral group 0 handler (see INT_GROUPO below)"
 
 # "INT_GROUP1":
-#   _add:
-#     _interrupts:
-#       "INT_GROUP1":
-#         value: 17
-#         description: 	"Combined peripheral group 1 handler (see INT_GROUP1 below)"
+"GPIO0,GPIO1,COMP0,COMP1,COMP2,TRNG":
+  _add:
+    _interrupts:
+      "INT_GROUP1":
+        value: 17
+        description: 	"Combined peripheral group 1 handler (see INT_GROUP1 below)"
+
 "TIMG8":
   _add:
     _interrupts:
