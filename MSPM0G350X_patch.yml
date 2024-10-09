@@ -59,20 +59,110 @@ _modify:
 #         description:  "Tick	SysTick handler"
 
 # "INT_GROUP0":
-"WWDT0,WWDT1,DEBUGSS,FLASHCTL,WUC,SYSCTL":
+"WWDT0":
   _add:
     _interrupts:
       "INT_GROUP0":
         value: 16
-        description: 	"Combined peripheral group 0 handler (see INT_GROUPO below)"
+        description: 	"WWDT0 interrupt handler"
+"WWDT1":
+  _add:
+    _interrupts:
+      "INT_GROUP0":
+        value: 16
+        description: 	"WWDT1 interrupt handler"
+
+"DEBUGSS":
+  _add:
+    _interrupts:
+      "INT_GROUP0":
+        value: 16
+        description: 	"Debug Subsystem interrupt handler"
+  _strip:
+    - "DEBUGSS_"
+
+"FLASHCTL":
+  _add:
+    _interrupts:
+      "INT_GROUP0":
+        value: 16
+        description: 	"Flash controller interrupt handler"
+
+"WUC":
+  _add:
+    _interrupts:
+      "INT_GROUP0":
+        value: 16
+        description: 	"Generic event subscriber 0 interrupt handler"
+  _strip:
+    - "WUC_"
+# "WUC":
+#   _add:
+#     _interrupts:
+#       "INT_GROUP0":
+#         value: 16
+#         description: 	"Generic event subscriber 1 interrupt handler"
+
+
+"SYSCTL":
+  _add:
+    _interrupts:
+      "INT_GROUP0":
+        value: 16
+        description: 	"PMCU (system controller) interrupt handler"
+  _delete:
+    - "SYSCTL_MGMT*"
+  _strip:
+    - "SYSCTL_"
 
 # "INT_GROUP1":
-"GPIO0,GPIO1,COMP0,COMP1,COMP2,TRNG":
+"GPIOA":
   _add:
     _interrupts:
       "INT_GROUP1":
         value: 17
-        description: 	"Combined peripheral group 1 handler (see INT_GROUP1 below)"
+        description: 	"GPIOA interrupt handler"
+
+"GPIOB":
+  _add:
+    _interrupts:
+      "INT_GROUP1":
+        value: 17
+        description: 	"GPIOB interrupt handler"
+
+"COMP0":
+  _add:
+    _interrupts:
+      "INT_GROUP1":
+        value: 17
+        description: 	"COMP0 interrupt handler"
+
+"COMP1":
+  _add:
+    _interrupts:
+      "INT_GROUP1":
+        value: 17
+        description: 	"COMP1 interrupt handler"
+
+"COMP2":
+  _add:
+    _interrupts:
+      "INT_GROUP1":
+        value: 17
+        description: 	"COMP2 interrupt handler"
+
+"TRNG":
+  _add:
+    _interrupts:
+      "INT_GROUP1":
+        value: 17
+        description: 	"TRNG interrupt handler"
+  _strip:
+    - "TRNG_"
+  _clusters:
+    "TRNG*":
+      _strip:
+        - "TRNG_"
 
 "TIMG8":
   _add:
@@ -227,12 +317,6 @@ _modify:
         value: 47
         description: 	"DMA interrupt handler"
 
-"SYSCTL":
-  _delete:
-    - "SYSCTL_MGMT*"
-  _strip:
-    - "SYSCTL_"
-
 "I2C?":
   _modify:
     _clusters:
@@ -253,9 +337,6 @@ _modify:
   _strip:
     - "I2C*_"
 
-"DEBUGSS":
-  _strip:
-    - "DEBUGSS_"
 
 "MATHACL":
   _strip:
@@ -339,14 +420,6 @@ _modify:
           bitOffset: 0x0
           bitWidth: 0x10
 
-"TRNG":
-  _strip:
-    - "TRNG_"
-  _clusters:
-    "TRNG*":
-      _strip:
-        - "TRNG_"
-
 
 "CANFD?":
   _strip:
@@ -405,9 +478,6 @@ _modify:
       _strip:
         - "CRC_"
 
-"WUC":
-  _strip:
-    - "WUC_"
 
 "VREF":
   _strip:
