@@ -1,15 +1,227 @@
 _svd: "./MSPM0G350X.svd"
 
+
+_delete:
+# ADC[0,1]_SVT has been encorporated into ADC
+  - "ADC?_SVT"
+# sysmem and flash are just memory regions, not peripherals
+  - "SYSMEM"
+  - "FLASH"
+
+  # add I2C1, which is missing
+# _copy:
+#   "12C1":
+#     from: "I2C0"
+
+
 _modify:
+#   "I2C1":
+#     baseAddress:
   "DEBUGSS":
     groupName: "DEBUG"
   "FLASHCTL":
     groupName: "FLASH"
+# "Reset":
+#   _add:
+#     _interrupts:
+#       "Reset":
+#         value: 1
+#         description: 	"Reset vector"
+# "NMI":
+#   _add:
+#     _interrupts:
+#       "NMI":
+#         value: 2
+#         description: 	"NMI handler"
+# "Hardfault":
+#   _add:
+#     _interrupts:
+#       "Hardfault":
+#         value: 3
+#         description:  "Hard fault handler"
+# "SVCall":
+#   _add:
+#     _interrupts:
+#       "SVCall":
+#         value: 11
+#         description: 	"Supervisor call handler"
+# "PendSV":
+#   _add:
+#     _interrupts:
+#       "PendSV":
+#         value: 14
+#         description: 	"Pended supervisor handler"
+# "Sys":
+#   _add:
+#     _interrupts:
+#       "Sys":
+#         value: 15
+#         description:  "Tick	SysTick handler"
+# "INT_GROUP0":
+#   _add:
+#     _interrupts:
+#       "INT_GROUP0":
+#         value: 16
+#         description: 	"Combined peripheral group 0 handler (see INT_GROUPO below)"
 
-_delete:
-  - "ADC?_SVT"
-  - "SYSMEM"
-  - "FLASH"
+# "INT_GROUP1":
+#   _add:
+#     _interrupts:
+#       "INT_GROUP1":
+#         value: 17
+#         description: 	"Combined peripheral group 1 handler (see INT_GROUP1 below)"
+"TIMG8":
+  _add:
+    _interrupts:
+      "TIMG8":
+        value: 18
+        description: 	"Timer TIMG8 interrupt handler"
+"UART3":
+  _add:
+    _interrupts:
+      "UART3":
+        value: 19
+        description: 	"UART3 interrupt handler"
+"ADC0":
+  _add:
+    _interrupts:
+      "ADC0":
+        value: 20
+        description: 	"ADCO interrupt handler"
+"ADC1":
+  _add:
+    _interrupts:
+      "ADC1":
+        value: 21
+        description: 	"ADC1 interrupt handler"
+"CANFD0":
+  _add:
+    _interrupts:
+      "CANFD0":
+        value: 22
+        description: 	"CAN-FD controller interrupt handler"
+"DAC0":
+  _add:
+    _interrupts:
+      "DAC0":
+        value: 23
+        description: 	"DACO interrupt handler"
+"SPI0":
+  _add:
+    _interrupts:
+      "SPI0":
+        value: 25
+        description: 	"SPIO interrupt handler"
+"SPI1":
+  _add:
+    _interrupts:
+      "SPI1":
+        value: 26
+        description: 	"SP|1 interrupt handler"
+"UART1":
+  _add:
+    _interrupts:
+      "UART1":
+        value: 29
+        description: 	"UART1 interrupt handler"
+"UART2":
+  _add:
+    _interrupts:
+      "UART2":
+        value: 30
+        description: 	"UART2 interrupt handler"
+"UART0":
+  _add:
+    _interrupts:
+      "UART0":
+        value: 31
+        description: 	"UARTO interrupt handler"
+"TIMG0":
+  _add:
+    _interrupts:
+      "TIMG0":
+        value: 32
+        description: 	"Timer TIMGO interrupt handler"
+"TIMG6":
+  _add:
+    _interrupts:
+      "TIMG6":
+        value: 33
+        description: 	"Timer TIMG6 interrupt handler"
+"TIMA0":
+  _add:
+    _interrupts:
+      "TIMA0":
+        value: 34
+        description: 	"Timer TIMAO interrupt handler"
+"TIMA1":
+  _add:
+    _interrupts:
+      "TIMA1":
+        value: 35
+        description: 	"Timer TIMA1 interrupt handler"
+"TIMG7":
+  _add:
+    _interrupts:
+      "TIMG7":
+        value: 36
+        description: 	"Timer TIMG7 interrupt handler"
+"TIMG12":
+  _add:
+    _interrupts:
+      "TIMG12":
+        value: 37
+        description: 	"Timer TIMG12 interrupt handler"
+"I2C0":
+  _add:
+    _interrupts:
+      "I2C0":
+        value: 40
+        description: 	"ICO interrupt handler"
+"I2C1":
+  _add:
+    _interrupts:
+      "I2C1":
+        value: 41
+        description: 	"12C1 interrupt handler"
+
+"AES":
+  _strip:
+    - "AES_"
+  _clusters:
+    "AES*":
+      _strip:
+        - "AES_"
+  _add:
+    _interrupts:
+      "AES":
+        value: 44
+        description: 	"AES accelerator interrupt handler"
+"RTC":
+  _strip:
+    - "RTC_"
+  _clusters:
+    "RTC*":
+      _strip:
+        - "RTC_"
+  _add:
+    _interrupts:
+      "RTC":
+        value: 46
+        description: 	"RTC interrupt handler"
+
+"DMA":
+  _strip:
+    - "DMA_"
+  _clusters:
+    "DMA*":
+      _strip:
+        - "DMA_"
+  _add:
+    _interrupts:
+      "DMA":
+        value: 47
+        description: 	"DMA interrupt handler"
 
 "SYSCTL":
   _delete:
@@ -131,13 +343,6 @@ _delete:
       _strip:
         - "TRNG_"
 
-"RTC":
-  _strip:
-    - "RTC_"
-  _clusters:
-    "RTC*":
-      _strip:
-        - "RTC_"
 
 "CANFD?":
   _strip:
@@ -195,13 +400,6 @@ _delete:
     "CRC*":
       _strip:
         - "CRC_"
-"DMA":
-  _strip:
-    - "DMA_"
-  _clusters:
-    "DMA*":
-      _strip:
-        - "DMA_"
 
 "WUC":
   _strip:
@@ -223,13 +421,6 @@ _delete:
       _strip:
         - "OPA?_"
 
-"AES":
-  _strip:
-    - "AES_"
-  _clusters:
-    "AES*":
-      _strip:
-        - "AES_"
 
 "UART?":
   _strip:
@@ -283,3 +474,6 @@ _delete:
             "PER_3": [0, "divions factor of 3"]
             "PER_5": [1, "divions factor of 5"]
             "PER_8": [2, "divions factor of 8"]
+
+
+
