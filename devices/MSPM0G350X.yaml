@@ -1,4 +1,4 @@
-_svd: "./MSPM0G350X.svd"
+_svd: "../svd/mspm0g350x.svd"
 
 _delete:
   # ADC[0,1]_SVT has been encorporated into ADC
