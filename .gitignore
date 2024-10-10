@@ -3,3 +3,6 @@ __pycache__
 .DS_Store
 .deps
 scratch
+svd/vendor/.extracted
+svd/vendor/*.svd
+svd/vendor/*.patched
