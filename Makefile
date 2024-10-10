@@ -8,7 +8,7 @@ SHELL := /usr/bin/env bash
 # Path to `svd`/`svdtools`
 SVDTOOLS ?= svdtools
 
-CRATES ?= mspm0
+CRATES ?= mspm0g3
 
 # All yaml files in devices/ will be used to patch an SVD
 YAMLS := $(foreach crate, $(CRATES), \
@@ -146,7 +146,7 @@ clean-svd:
 	rm -f svd/*.svd
 	rm -f svd/.extracted
 
-clean: clean-rs clean-patch clean-html clean-svd clean-mmaps clean-svdconv
+clean: clean-rs clean-patch clean-html clean-svd clean-mmaps clean-svdconv clean-crates
 	rm -rf .deps
 
 # As alternative to `pip install --user svdtools`:

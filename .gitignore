@@ -6,3 +6,19 @@ scratch
 svd/vendor/.extracted
 svd/vendor/*.svd
 svd/vendor/*.patched
+
+**/__pycache__/
+**/target/
+**/*.rs.bk
+**/Cargo.lock
+.deps/
+*/src/stm32*/
+*/src/generic.rs
+html/
+mmaps/
+svdconv/
+/venv
+.devcontainer
+
+# automatically generated crates
+# /mspm0*/

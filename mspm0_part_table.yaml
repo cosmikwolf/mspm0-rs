@@ -10,11 +10,11 @@
 #
 # This data is used to generate more informative crate READMEs.
 
-mspm0:
-  mspm0g3:
+mspm0g3:
+  mspm0g350x:
     url: https://www.ti.com/microcontrollers-mcus-processors/arm-based-microcontrollers/arm-cortex-m0-mcus/overview.html
     rm: slau846a
     rm_title: MSPM0 G-Series 80-MHz Microcontrollers
     rm_url: https://www.ti.com/lit/pdf/slau846
     members:
-      - mspm0g350x
+      - MSPM0G350X

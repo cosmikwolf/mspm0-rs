@@ -20,11 +20,11 @@ VERSION = "0.15.1"
 SVD2RUST_VERSION = "0.33.3"
 
 CRATE_DOC_FEATURES = {
-    "mspm0g3": ["critical-section", "rt", "mspm0g3507"]
+    "mspm0g3": ["critical-section", "rt", "mspm0g350x"]
 }
 
 CRATE_DOC_TARGETS = {
-    "mpspm0g3": "thumbv6m-none-eabi",
+    "mspm0g3": "thumbv6m-none-eabi",
 }
 
 CARGO_TOML_TPL = """\
@@ -196,19 +196,30 @@ def main(devices_path, yes, families):
 
     for path in glob.glob(os.path.join(devices_path, "*.yaml")):
         yamlfile = os.path.basename(path)
-        family = re.match(r'mspm0[a-z][0-9]', yamlfile)[0]
+        match = re.match(r'mspm0[a-z]+[0-9]', yamlfile)
+        if match:
+            family = match.group(0)
+        else:
+            raise ValueError(f"Filename {yamlfile} does not match the expected pattern")
         # if family.startswith('stm32wl'):
         #     family = 'stm32wl'
         # if family.startswith('stm32wb'):
         #     family = 'stm32wb'
         device = os.path.splitext(yamlfile)[0].lower()
+        print(f"Found device {device}")
+        print(f"families: {families}")
+        print(f"family: {family}")
         if len(families) == 0 or family in families:
+            print(f"Adding device {device} to family {family}")
             if family not in devices:
                 devices[family] = []
             devices[family].append(device)
 
+    print(devices)
+    print(families)
     table = read_device_table()
 
+    print(table)
     dirs = ", ".join(x.lower()+"/" for x in devices)
     print("Going to create/update the following directories:")
     print(dirs)

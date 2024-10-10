@@ -4,4 +4,5 @@ for f in vendor/*.zip; do
 done
 
 # fix mspm0g350x
-sed -e 's/read-writeonce/read-writeOnce/g' MSPM0G350X.svd
+mv MSPM0G350X.svd mspm0g350x.svd
+sed -e 's/read-writeonce/read-writeOnce/g' mspm0g350x.svd
