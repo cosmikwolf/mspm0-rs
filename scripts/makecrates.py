@@ -4,7 +4,7 @@ Copyright 2017-2019 Adam Greig
 Licensed under the MIT and Apache 2.0 licenses.
 
 Autogenerate the crate Cargo.toml, build.rs, README.md and src/lib.rs files
-based on available YAML files for each STM32 family.
+based on available YAML files for each MSPM0 family.
 
 Usage: python3 scripts/makecrates.py devices/
 """
@@ -20,47 +20,11 @@ VERSION = "0.15.1"
 SVD2RUST_VERSION = "0.33.3"
 
 CRATE_DOC_FEATURES = {
-    "stm32c0": ["critical-section", "rt", "stm32c011", "stm32c031"],
-    "stm32f0": ["critical-section", "rt", "stm32f0x0", "stm32f0x1", "stm32f0x2", "stm32f0x8"],
-    "stm32f1": ["critical-section", "rt", "stm32f100", "stm32f101", "stm32f102", "stm32f103", "stm32f107"],
-    "stm32f2": ["critical-section", "rt", "stm32f215", "stm32f217"],
-    "stm32f3": ["critical-section", "rt", "stm32f302", "stm32f303", "stm32f373"],
-    "stm32f4": ["critical-section", "rt", "stm32f401", "stm32f407", "stm32f413", "stm32f469"],
-    "stm32f7": ["critical-section", "rt", "stm32f7x3", "stm32f7x9"],
-    "stm32h5": ["critical-section", "rt", "stm32h503", "stm32h562", "stm32h563", "stm32h573"],
-    "stm32h7": ["critical-section", "rt", "stm32h743", "stm32h743v", "stm32h747cm7"],
-    "stm32l0": ["critical-section", "rt", "stm32l0x0", "stm32l0x1", "stm32l0x2", "stm32l0x3"],
-    "stm32l1": ["critical-section", "rt", "stm32l100", "stm32l151", "stm32l162"],
-    "stm32l4": ["critical-section", "rt", "stm32l4x1", "stm32l4x5"],
-    "stm32l5": ["critical-section", "rt", "stm32l562"],
-    "stm32g0": ["critical-section", "rt", "stm32g030", "stm32g070", "stm32g0b0", "stm32g041", "stm32g081", "stm32g0c1"],
-    "stm32g4": ["critical-section", "rt", "stm32g431", "stm32g441", "stm32g474", "stm32g484"],
-    "stm32mp1": ["critical-section", "rt", "stm32mp157"],
-    "stm32u5": ["critical-section", "rt", "stm32u535", "stm32u545", "stm32u575", "stm32u585", "stm32u595", "stm32u5a5", "stm32u599", "stm32u5a9"],
-    "stm32wl": ["critical-section", "rt", "stm32wle5", "stm32wl5x_cm4"],
-    "stm32wb": ["critical-section", "rt", "stm32wb55"]
+    "mspm0g3": ["critical-section", "rt", "mspm0g3507"]
 }
 
 CRATE_DOC_TARGETS = {
-    "stm32c0": "thumbv6m-none-eabi",
-    "stm32f0": "thumbv6m-none-eabi",
-    "stm32f1": "thumbv7m-none-eabi",
-    "stm32f2": "thumbv7m-none-eabi",
-    "stm32f3": "thumbv7em-none-eabihf",
-    "stm32f4": "thumbv7em-none-eabihf",
-    "stm32f7": "thumbv7em-none-eabihf",
-    "stm32h5": "thumbv8m.main-none-eabihf",
-    "stm32h7": "thumbv7em-none-eabihf",
-    "stm32l0": "thumbv6m-none-eabi",
-    "stm32l1": "thumbv7m-none-eabi",
-    "stm32l4": "thumbv7em-none-eabihf",
-    "stm32l5": "thumbv8m.main-none-eabi",
-    "stm32g0": "thumbv6m-none-eabi",
-    "stm32g4": "thumbv7em-none-eabihf",
-    "stm32mp1": "thumbv7em-none-eabihf",
-    "stm32u5": "thumbv8m.main-none-eabi",
-    "stm32wl": "thumbv7em-none-eabi",
-    "stm32wb": "thumbv7em-none-eabihf"
+    "mpspm0g3": "thumbv6m-none-eabi",
 }
 
 CARGO_TOML_TPL = """\
@@ -68,11 +32,11 @@ CARGO_TOML_TPL = """\
 edition = "2021"
 name = "{crate}"
 version = "{version}"
-authors = ["Adam Greig <adam@adamgreig.com>", "stm32-rs Contributors"]
+authors = ["Tenkai Kariya <tenkai@kariya.ai>", "stm32-rs creators and contributors"]
 description = "Device support crates for {family} devices"
-repository = "https://github.com/stm32-rs/stm32-rs"
+repository = "https://github.com/cosmikwolf/mspm0-rs"
 readme = "README.md"
-keywords = ["stm32", "svd2rust", "no_std", "embedded"]
+keywords = ["mspm0", "svd2rust", "no_std", "embedded"]
 categories = ["embedded", "no-std"]
 license = "MIT/Apache-2.0"
 rust-version = "1.65"
@@ -107,7 +71,7 @@ SRC_LIB_RS_TPL = """\
 //! [svd2rust/#peripheral-api](https://docs.rs/svd2rust/{svd2rust_version}/svd2rust/#peripheral-api)
 //!
 //! For more details see the README here:
-//! [stm32-rs](https://github.com/stm32-rs/stm32-rs)
+//! [mspm0-rs](https://github.com/cosmikwolf/mspm0-rs)
 //!
 //! This crate supports all {family} devices; for the complete list please
 //! see:
@@ -115,7 +79,7 @@ SRC_LIB_RS_TPL = """\
 //!
 //! Due to doc build limitations, not all devices may be shown on docs.rs;
 //! a representative few have been selected instead. For a complete list of
-//! available registers and fields see: [stm32-rs Device Coverage](https://stm32-rs.github.io/stm32-rs/)
+//! available registers and fields see: [mspm0-rs Device Coverage](https://mspm0-rs.github.io/mspm0-rs/)
 
 #![allow(non_camel_case_types)]
 #![allow(non_snake_case)]
@@ -136,7 +100,8 @@ extensive type-safe support. For more information please see the [main repo].
 Refer to the [documentation] for full details.
 
 [svd2rust]: https://github.com/rust-embedded/svd2rust
-[main repo]: https://github.com/stm32-rs/stm32-rs
+[main repo]: https://github.com/cosmikwolf/mspm0-rs
+[based on]: https://github.com/stm32-rs/stm32-rs
 [documentation]: https://docs.rs/{crate}/latest/{crate}/
 
 ## Usage
@@ -193,7 +158,7 @@ fn main() {{
 def read_device_table():
     path = os.path.join(
         os.path.abspath(os.path.split(__file__)[0]), os.pardir,
-        "stm32_part_table.yaml")
+        "mspm0_part_table.yaml")
     with open(path, encoding='utf-8') as f:
         table = yaml.safe_load(f)
     return table
@@ -231,11 +196,11 @@ def main(devices_path, yes, families):
 
     for path in glob.glob(os.path.join(devices_path, "*.yaml")):
         yamlfile = os.path.basename(path)
-        family = re.match(r'stm32[a-z]+[0-9]', yamlfile)[0]
-        if family.startswith('stm32wl'):
-            family = 'stm32wl'
-        if family.startswith('stm32wb'):
-            family = 'stm32wb'
+        family = re.match(r'mspm0[a-z][0-9]', yamlfile)[0]
+        # if family.startswith('stm32wl'):
+        #     family = 'stm32wl'
+        # if family.startswith('stm32wb'):
+        #     family = 'stm32wb'
         device = os.path.splitext(yamlfile)[0].lower()
         if len(families) == 0 or family in families:
             if family not in devices:
