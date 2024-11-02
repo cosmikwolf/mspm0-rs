@@ -3,9 +3,9 @@ __pycache__
 .DS_Store
 .deps
 scratch
-svd/vendor/.extracted
-svd/vendor/*.svd
-svd/vendor/*.patched
+/svd/.extracted
+svd/*.svd
+svd/*.patched
 
 **/__pycache__/
 **/target/
@@ -21,4 +21,4 @@ svdconv/
 .devcontainer
 
 # automatically generated crates
-# /mspm0*/
+/mspm0*/
