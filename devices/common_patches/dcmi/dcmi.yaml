@@ -1,6 +1,0 @@
-"DCMI":
-  _modify:
-    _interrupts:
-      DCMI:
-        name: DCMI_PSSI
-        description: DCMI/PSSI global interrupt

@@ -1,6 +1,0 @@
-
-RCC:
-  CSICFGR:
-    _modify:
-      CSICAL:
-        bitWidth: 10

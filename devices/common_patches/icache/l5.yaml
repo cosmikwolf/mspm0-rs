@@ -1,7 +1,0 @@
-_modify:
-  ICache:
-    name: ICACHE
-
-ICACHE:
-  _strip:
-    - ICACHE_

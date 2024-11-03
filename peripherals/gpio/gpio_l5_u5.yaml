@@ -1,6 +1,0 @@
-# This GPIO is used on the STM32L5 and U5 families.
-
-_include:
-  - v3/common.yaml
-  - v3/af0-15.yaml
-  - gpio_with_brr.yaml

@@ -1,9 +1,0 @@
-SYSCFG:
-  _modify:
-    MEMRM:
-      name: MEMRMP
-  MEMRMP:
-    _modify:
-      MEM_MODE:
-        name: MEM_BOOT
-        bitWidth: 1

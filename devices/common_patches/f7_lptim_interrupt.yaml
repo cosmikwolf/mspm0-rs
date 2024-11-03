@@ -1,7 +1,0 @@
-# Add missing LP_Timer1 interrupt for some STM32F7 devices.
-
-LPTIM1:
-  _modify:
-    _interrupts:
-      LPTimer1:
-        name: LP_Timer1
